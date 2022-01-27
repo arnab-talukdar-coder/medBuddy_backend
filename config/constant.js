@@ -1,4 +1,10 @@
+require("dotenv").config();
+
 module.exports = { 
+  Environment: {
+    HOST: process.env.HOST,
+    PORT: process.env.PORT,
+  },
 
   DataTypes: {
     CHAR: 'char',
