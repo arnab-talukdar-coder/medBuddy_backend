@@ -20,13 +20,14 @@ exports.setup = function (options, seedLink) {
 };
 
 exports.up = function (db) {
-  return db.createTable(DbTables.User, {
+  return db.createTable(DbTables.Doctors, {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    first_name: { type: DataTypes.STRING, notNull: true },
-    last_name: { type: DataTypes.STRING, notNull: true },
+    name: { type: DataTypes.STRING, notNull: true },
     email: { type: DataTypes.STRING, notNull: true },
     password: { type: DataTypes.STRING, notNull: true },
+    phone_number: { type: DataTypes.STRING, notNull: true },
     is_active: { type: DataTypes.BOOLEAN, default: false, notNull: false },
+    is_verified: { type: DataTypes.BOOLEAN, default: false, notNull: false },
     createdAt: { type: DataTypes.DATE_TIME, notNull: false },
     updatedAt: { type: DataTypes.DATE_TIME, notNull: false },
     deletedAt: { type: DataTypes.DATE_TIME, notNull: false },
@@ -34,7 +35,7 @@ exports.up = function (db) {
 };
 
 exports.down = function (db) {
-  return db.dropTable(DbTables.User);
+  return db.dropTable(DbTables.Doctors);
 };
 
 exports._meta = {

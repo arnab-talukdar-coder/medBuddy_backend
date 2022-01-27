@@ -1,7 +1,7 @@
 const { responseHelper, userHelper, mailHelper } = require("../helpers")
 
 const {
-  User,
+  Doctors,
   UserVerification,
 } = require("../models");
 
@@ -44,14 +44,13 @@ const userRegister = async (req, h) => {
   try {
 
     const {
-      first_name,
-      last_name,
+      name,
       email,
       password,
     } = req.payload;
 
     // Does the user exists?
-    const userExists = await User.findOne({
+    const userExists = await Doctors.findOne({
       where: {
         email,
       },
@@ -65,24 +64,23 @@ const userRegister = async (req, h) => {
 
     // creating a new user.
     const newHash = userHelper.hashPassword(password);
-    const userCreate = await User.create({
-      first_name,
-      last_name,
+    const userCreate = await Doctors.create({
+      name,
       email,
       password: newHash,
     });
 
-    const otp = userHelper.generateOtp();
-    await UserVerification.create({
-      otp,
-      user_id: userCreate.id,
-    });
+    // const otp = userHelper.generateOtp();
+    // await UserVerification.create({
+    //   otp,
+    //   user_id: userCreate.id,
+    // });
 
-    mailHelper({
-      to: email,
-      subject: "Verification email",
-      text: `Your otp is ${otp}`
-    });
+    // mailHelper({
+    //   to: email,
+    //   subject: "Verification email",
+    //   text: `Your otp is ${otp}`
+    // });
 
     return responseHelper.success(h, "USERREGISTER200");
 

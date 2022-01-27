@@ -27,8 +27,7 @@ module.exports = {
   },
 
   DbTables: {
-    User: 'users',
-    UserVerification: 'user_verifications',
+    Doctors: 'doctors',
   }
 
 };

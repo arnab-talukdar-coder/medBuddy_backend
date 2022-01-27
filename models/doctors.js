@@ -3,18 +3,14 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config");
 const { DbTables } = require("../config").constant;
 
-const User = sequelize.define(DbTables.User, {
+const Doctors = sequelize.define(DbTables.Doctors, {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
   },
-  first_name: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
-  last_name: {
+  name: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
@@ -26,7 +22,16 @@ const User = sequelize.define(DbTables.User, {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
+  phone_number: {
+    type: DataTypes.STRING(10),
+    allowNull: true,
+  },
   is_active: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,
+  },
+  is_Verified: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
     defaultValue: false,
@@ -45,7 +50,7 @@ const User = sequelize.define(DbTables.User, {
     allowNull: true,
   },
 }, {
-  tableName: DbTables.User,
+  tableName: DbTables.Doctors,
 });
 
-module.exports = User;
+module.exports = Doctors;
